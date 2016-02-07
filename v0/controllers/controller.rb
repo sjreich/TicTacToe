@@ -92,7 +92,7 @@ class Controller
   end
 end
 
-if __FILE__ == 'controller.rb'
+if __FILE__ == 'controllers/controller.rb'
   Controller.new.execute
 end
 
