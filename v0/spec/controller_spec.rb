@@ -1,4 +1,4 @@
-require_relative '../controller'
+require_relative '../controllers/controller'
 require 'pry'
 
 describe Controller do

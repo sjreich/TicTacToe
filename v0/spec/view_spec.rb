@@ -1,4 +1,4 @@
-require_relative '../view'
+require_relative '../views/board'
 
 describe Board do
   let(:game) { Game.new }

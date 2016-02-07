@@ -1,5 +1,7 @@
-require_relative "model"
-require_relative "view"
+require_relative '../models/game'
+require_relative '../models/move'
+require_relative '../views/board'
+require_relative '../views/menu'
 
 class Controller
   attr_accessor :game, :board
