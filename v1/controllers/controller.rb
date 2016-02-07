@@ -1,33 +1,29 @@
 require_relative '../models/game'
 require_relative '../models/move'
 require_relative '../views/board'
-require_relative '../views/menu'
+require_relative '../models/menu'
 
 class Controller
   attr_accessor :game, :board
 
   def execute
     loop do
-      run_menu
-      input = gets.chomp.upcase
-      print "\n"
-      sleep 1
-      case input
-      when "S"
-        run_game
-      when "R"
-        display_move_list
-      when "Q"
-        quit
-      else
-        puts "That wasn't one of the options."
-      end
+      Menu.display
+      act_on_menu_choice(Menu.get_selection)
       sleep 1
     end
   end
 
-  def run_menu
-    Menu.new.display
+  def act_on_menu_choice(choice)
+    sleep 1
+    case choice
+    when :s
+      run_game
+    when :r
+      display_move_list
+    when :q
+      quit
+    end
   end
 
   def quit
@@ -58,8 +54,8 @@ class Controller
   end
 
   def run_game
-    game = Game.new
-    board = Board.new(game)
+    @game = Game.new
+    @board = Board.new(game)
     board.draw
     while !game.winner? do
       new_move
