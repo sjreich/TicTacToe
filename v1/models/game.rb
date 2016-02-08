@@ -6,6 +6,10 @@ class Game
     @grid = [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]]
   end
 
+  def display
+    Board.new(move_list).draw
+  end
+
   def register(move)
     x = move.loc[:x]
     y = move.loc[:y]

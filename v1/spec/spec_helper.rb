@@ -1,5 +1,6 @@
 require 'rspec/its'
 require 'pry'
+require_relative 'helpers'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -11,4 +12,6 @@ RSpec.configure do |config|
   end
 
   config.order = :random
+
+  config.include Helpers
 end

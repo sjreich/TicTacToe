@@ -4,7 +4,7 @@ require_relative '../views/board'
 require_relative '../models/menu'
 
 class Controller
-  attr_accessor :game, :board
+  attr_accessor :game
 
   def execute
     loop do
@@ -55,8 +55,7 @@ class Controller
 
   def run_game
     @game = Game.new
-    @board = Board.new(game)
-    board.draw
+    game.display
     while !game.winner? do
       new_move
     end
@@ -76,7 +75,7 @@ class Controller
     end
     move = Move.new(input)
     game.register(move)
-    board.update
+    game.display
   end
 
   def get_input

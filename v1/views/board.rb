@@ -1,42 +1,31 @@
 class Board
-  attr_accessor :pixel_array, :game
+  attr_reader :pixel_array, :move_list
 
   SQUARE_HEIGHT = 4.freeze
   SQUARE_WIDTH = 6.freeze
 
-  def initialize(game)
-    @game = game
-    @pixel_array = set_pixel_array
-  end
-
-  def update
-    set_pixel_array
-    game.move_list.each do |move|
-      add_to_pixel_array(move)
-    end
-    draw
+  def initialize(move_list)
+    @move_list = move_list
+    @pixel_array = initial_pixel_array
   end
 
   def draw
-    pixel_array.each{ |row| puts row.join }
+    puts pixel_string
   end
 
-  def add_to_pixel_array(move)
-    x_dim = pixelize(move.loc[:x], SQUARE_HEIGHT)
-    y_dim = pixelize(move.loc[:y], SQUARE_WIDTH)
-    pixel_array[x_dim][y_dim] = move.symbol
+  def final_pixel_array
+    @pixel_array = initial_pixel_array
+    move_list.each do |move|
+      add_to_pixel_array(move)
+    end
+    pixel_array
   end
 
-  # private
-  def total_length(square_length)
-    3 * square_length - 1
-  end
-
-  def set_pixel_array
-    output = []
-    for row in 1..total_length(SQUARE_HEIGHT)
+  def initial_pixel_array
+    pixel_array = []
+    for row in 1..board_length(SQUARE_HEIGHT)
       row_output = []
-      for col in 1..total_length(SQUARE_WIDTH)
+      for col in 1..board_length(SQUARE_WIDTH)
         if intersection_here?(row, col)
           row_output << "+"
         elsif horizontal_here?(row)
@@ -47,9 +36,24 @@ class Board
           row_output << " "
         end
       end
-      output << row_output
+      pixel_array << row_output
     end
-    pixel_array = output
+    pixel_array
+  end
+
+  private
+  def pixel_string
+    final_pixel_array.map(&:join).join("\n")
+  end
+
+  def add_to_pixel_array(move)
+    x_dim = pixelize(move.loc[:x], SQUARE_HEIGHT)
+    y_dim = pixelize(move.loc[:y], SQUARE_WIDTH)
+    pixel_array[x_dim][y_dim] = move.symbol
+  end
+
+  def board_length(square_length)
+    3 * square_length - 1
   end
 
   def intersection_here?(row, col)

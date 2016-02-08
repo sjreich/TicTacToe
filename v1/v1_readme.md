@@ -37,4 +37,7 @@ Menu - combines two function: what the menu information is, and how it is displa
      - really, it should be its own model-type object, which has a display method (which would just be a print statement)
      - and we can work similarly for the relationship between game and board: the latter is a way of displaying the former, invoked only by a display method on Game.
 
+Board - should only exist from the display function in the Board
+      - this is a pretty short-lived object.  Does that mean it should be a module?  How to deal with this situation best?
+
 Other things that bug me: - all of this requiring of files is awfully cumbersome
