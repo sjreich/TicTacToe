@@ -21,6 +21,24 @@ describe Game do
     allow(game).to receive(:puts)
   end
 
+  describe '#new_move' do
+    subject { super().new_move }
+
+    it 'should increment number of moves in the game model' do
+      expect{ subject }.to change{ model_game.move_list.count }.by(1)
+    end
+
+    it 'should increment the number of moves in the view' do
+      expect{ subject }.to change{ board_move_count }.by(1)
+    end
+  end
+
+  describe '#get_input' do
+    subject { super().get_input }
+    it { should be_a Array }
+    its(:size) { should eq 2}
+  end
+
   describe '#winner?' do
     subject { super().winner? }
 
@@ -78,42 +96,42 @@ describe Game do
   end
 
   describe '#valid_move?' do
-    subject { super().valid_move?(coordinates) }
+    subject { super().valid_move?(move) }
 
     context 'move is out of bounds' do
       [
-        {x: -1, y: 2},
-        {x: 2, y: -1},
-        {x: 4, y: 2},
-        {x: 2, y: 4}
+        [-1, 2],
+        [2, -1],
+        [4, 2],
+        [2, 4]
       ].each do |coordinates|
-        let(:coordinates) { coordinates }
+        let(:move) { Move.new(coordinates[0], coordinates[1]) }
         it { should eq false }
       end
     end
 
     context 'move is in bounds (and not taken)' do
       [
-        {x: 0, y: 2},
-        {x: 2, y: 0},
-        {x: 1, y: 2},
-        {x: 2, y: 1}
+        [0, 2],
+        [2, 0],
+        [1, 2],
+        [2, 1]
       ].each do |coordinates|
-        let(:coordinates) { coordinates }
+        let(:move) { Move.new(coordinates[0], coordinates[1]) }
         it { should eq true }
       end
     end
 
     context 'when the position is already taken' do
       { 
-        upper_left: {x: 0, y: 0},
-        top: {x: 0, y: 1},
-        upper_right: {x: 0, y: 2},
-        center: {x: 1, y: 1},
-        lower_right: {x: 2, y: 2}
+        upper_left:   [0, 0],
+        top:          [1, 1],
+        upper_right:  [0, 2],
+        center:       [1, 1],
+        lower_right:  [2, 2]
       }.each do |loc, coordinates|
-        let(loc) { 'X' }
-        let(:coordinates) { coordinates }
+        let(loc) { :X }
+        let(:move) { Move.new(coordinates[0], coordinates[1]) }
         it { should eq false }
       end
     end

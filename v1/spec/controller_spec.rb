@@ -17,22 +17,4 @@ describe Controller do
     allow(model_game).to receive(:display) { board }
     allow_any_instance_of(Board).to receive(:puts)
   end
-
-  describe '#new_move' do
-    subject { super().new_move }
-
-    it 'should increment number of moves in the game model' do
-      expect{ subject }.to change{ model_game.move_list.count }.by(1)
-    end
-
-    it 'should increment the number of moves in the view' do
-      expect{ subject }.to change{ board_move_count }.by(1)
-    end
-  end
-
-  describe '#get_input' do
-    subject { super().get_input }
-    it { should be_a Hash }
-    its(:size) { should eq 2}
-  end
 end

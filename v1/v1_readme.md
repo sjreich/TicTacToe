@@ -38,6 +38,9 @@ Menu - combines two function: what the menu information is, and how it is displa
      - and we can work similarly for the relationship between game and board: the latter is a way of displaying the former, invoked only by a display method on Game.
 
 Board - should only exist from the display function in the Board
-      - this is a pretty short-lived object.  Does that mean it should be a module?  How to deal with this situation best?
+      - this is a pretty short-lived object.  Does that mean it should be a module?  How to deal with this situation best? A singleton?
+
+Move - a genuine class should have data and behavior.  This has data, but not really data.  It's just supposed to be an association of    
+        convenience.  But maybe it's not actually all that convenient.  Even the move list isn't a list of Moves.  Still not sure whether this class should exist.  Also: should it validate itself?  Really, it seems like its validation is purely a relational matter.  Or not quite purely: out-of-bounds-ed-ness is an inherent feature.  Let's stick that in here.
 
 Other things that bug me: - all of this requiring of files is awfully cumbersome

@@ -10,12 +10,44 @@ class Game
     Board.new(move_list).draw
   end
 
-  def register(move)
+  def register_move(x, y)
+    move = Move.new(x, y)
     x = move.loc[:x]
     y = move.loc[:y]
     @grid[x][y] = move.symbol
 
     @move_list << move
+  end
+
+  def run
+    display
+    until winner? do
+      new_move
+      display
+    end
+    sleep 1
+    print "It's over. "
+    if winner? == :X || winner? == :O
+      puts "#{game.winner?}'s win."
+    else
+      puts "It's a tie."
+    end
+  end
+
+  def new_move
+    input = get_input
+    until valid_move?(input) do 
+      input = get_input
+    end
+    register_move(input)
+  end
+
+  def get_input
+    print "row (1-3): "
+    x = gets.chomp.to_i - 1
+    print "column (1-3): "
+    y = gets.chomp.to_i - 1
+    [x, y]
   end
 
   def winner?
@@ -25,10 +57,7 @@ class Game
     end
     result ||= diag_from_upper_left_winner
     result ||= diag_from_upper_right_winner
-
-    # check for tie
-    # interesting project: better tie-detecting method
-    result ||= @move_list.count >= 9
+    result ||= tie?
   end
 
   def row_winner(i)
@@ -47,13 +76,15 @@ class Game
     @grid[2][0] if @grid[0][2] == @grid[1][1] && @grid[1][1] == @grid[2][0]
   end
 
-  def valid_move?(input)
-    x = input[:x]
-    y = input[:y]
-    if out_of_bounds?(x, y)
+  def tie?
+    @move_list.count >= 9
+  end
+
+  def valid_move?(move)
+    if !move.in_bounds?
       puts "That move is out of bounds"
       false
-    elsif position_already_taken?(x, y)
+    elsif position_already_taken?(move)
       puts "That square is already full"
       false
     else
@@ -61,11 +92,7 @@ class Game
     end
   end
 
-  def position_already_taken?(x, y)
-    @grid[x][y] != nil
-  end
-
-  def out_of_bounds?(x, y)
-    x < 0 || x > 2 || y < 0 || y > 2
+  def position_already_taken?(move)
+    @grid[move.x][move.y] != nil
   end
 end

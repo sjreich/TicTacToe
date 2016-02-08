@@ -55,35 +55,7 @@ class Controller
 
   def run_game
     @game = Game.new
-    game.display
-    while !game.winner? do
-      new_move
-    end
-    sleep 1
-    print "It's over. "
-    if game.winner? == "X" || game.winner? == "O"
-      puts "#{game.winner?}'s win."
-    else
-      puts "It's a tie.  How dull..."
-    end
-  end
-
-  def new_move
-    input = get_input
-    until game.valid_move?(input) do 
-      input = get_input
-    end
-    move = Move.new(input)
-    game.register(move)
-    game.display
-  end
-
-  def get_input
-    print "row (1-3): "
-    x = gets.chomp.to_i - 1
-    print "column (1-3): "
-    y = gets.chomp.to_i - 1
-    {x: x, y: y}
+    game.run
   end
 end
 
