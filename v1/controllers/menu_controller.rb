@@ -3,7 +3,7 @@ require_relative '../models/move'
 require_relative '../views/board'
 require_relative '../models/menu'
 
-class Controller
+class MenuController
   attr_accessor :game
 
   def execute
@@ -35,19 +35,7 @@ class Controller
 
   def display_move_list
     if game
-      puts "\tX\t|\tO\t"
-      puts "----------------+-----------------"
-      game.move_list.each_slice(2) do |pair|
-        x1 = pair[0].loc[:x] + 1
-        y1 = pair[0].loc[:y] + 1
-        print "\t#{x1}, #{y1}\t|"
-        if pair[1]
-          x2 = pair[1].loc[:x] + 1
-          y2 = pair[1].loc[:y] + 1
-          print "\t#{x2}, #{y2}"
-        end
-        print "\n"
-      end
+      game.display_move_list
     else
       puts "No last game to review."
     end

@@ -1,7 +1,7 @@
 require_relative '../controllers/controller'
 require 'pry'
 
-describe Controller do
+describe MenuController do
 
   let(:model_game) { Game.new }
   let(:controller) { Controller.new }
