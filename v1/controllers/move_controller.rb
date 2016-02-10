@@ -35,9 +35,9 @@ class MoveController
 
   def input
     print "row (1-3): "
-    x = gets.chomp.to_i - 1
+    x = gets.chomp.to_i
     print "column (1-3): "
-    y = gets.chomp.to_i - 1
+    y = gets.chomp.to_i
     [x, y]
   end
 end

@@ -21,6 +21,7 @@ Your choice: "
       print "\n"
       break if ACCEPTABLE_CHOICES.include? selection
       puts "That wasn't one of the options."
+      Menu.display
     end 
     selection
   end

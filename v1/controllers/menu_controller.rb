@@ -1,7 +1,8 @@
+require_relative 'game_controller'
 require_relative '../models/game'
 require_relative '../models/move'
-require_relative '../views/board'
 require_relative '../models/menu'
+require_relative '../views/board'
 
 class MenuController
   attr_accessor :game
@@ -34,20 +35,24 @@ class MenuController
   end
 
   def display_move_list
-    if game
-      game.display_move_list
+    unless old_games.empty?
+      old_games.last.display_move_list
     else
       puts "No last game to review."
     end
   end
 
+  def old_games
+    @game_controller.old_game_storage.games
+  end
+
   def run_game
-    @game = Game.new
-    game.run
+    @game_controller = GameController.new
+    @game_controller.run!
   end
 end
 
-if __FILE__ == 'controllers/controller.rb'
-  Controller.new.execute
+if __FILE__ == 'controllers/menu_controller.rb'
+  MenuController.new.execute
 end
 

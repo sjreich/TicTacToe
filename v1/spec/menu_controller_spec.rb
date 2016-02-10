@@ -1,4 +1,4 @@
-require_relative '../controllers/controller'
+require_relative '../controllers/menu_controller'
 require 'pry'
 
 describe MenuController do

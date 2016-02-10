@@ -3,7 +3,7 @@ class Game
   
   def initialize
     @move_list = []
-    @grid = fill_in_grid
+    update_grid!
   end
 
   def display_move_list
@@ -22,37 +22,32 @@ class Game
     end
   end
 
-  def display
+  def display!
     Board.new(move_list).draw
   end
 
   def valid_move?(move)
-    if out_of_bounds?(move)
-      puts "That move is out of bounds"
-      false
-    elsif position_already_taken?(move)
-      puts "That square is already full"
-      false
-    else
-      true
-    end
-  end
-
-  def valid_move?(move)
+    update_grid!
     x = move.x
     y = move.y
     @grid[x][y].nil?
   end
 
   def register_move(move)
-    x = move[0]
-    y = move[1]
-    move = Move.new(x, y)
-    @grid[x][y] = move.symbol
     @move_list << move
   end
 
+  def update_grid!
+    @grid = [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]]
+    move_list.each do |move|
+      x = move.x
+      y = move.y
+      @grid[x][y] = move.symbol
+    end
+  end
+
   def winner?
+    update_grid!
     result = false
     for i in 0..2
       result ||= row_winner(i) || col_winner(i)
@@ -78,16 +73,15 @@ class Game
     grid[2][0] if grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]
   end
 
-  def fill_in_grid
-    output = [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]]
-    move_list.each do |move|
-      binding.pry
-      output[(move.x)-1][(move.y)-1] = move.symbol
-    end
-    @grid = output
-  end
-
   def tie?
     @move_list.count >= 9
+  end
+end
+
+class OldGameStorage
+  attr_accessor :games
+  
+  def initialize
+    @games = []
   end
 end

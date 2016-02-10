@@ -5,10 +5,8 @@ describe MoveController do
   subject { MoveController.new(game) }
   let(:game) { Game.new }
 
-
   before(:each) do
     allow(subject).to receive(:gets) { '2' }
-    allow(game).to receive(:register_move)
   end
 
   describe '#execute!' do

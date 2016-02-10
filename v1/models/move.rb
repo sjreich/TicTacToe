@@ -1,5 +1,5 @@
 class Move
-  attr_reader :symbol, :x, :y
+  attr_reader :symbol
 
   ACCEPTABLE_SYMBOLS = [:X, :O].freeze
 
@@ -31,5 +31,21 @@ class Move
       puts "#{sym} is not an acceptable symbol."
       false
     end
+  end
+
+  def disp_x
+    @x
+  end
+
+  def disp_y
+    @y
+  end
+
+  def x
+    @x - 1
+  end
+
+  def y
+    @y - 1
   end
 end

@@ -47,9 +47,9 @@ class Board
   end
 
   def add_to_pixel_array(move)
-    x_dim = pixelize(move.x, SQUARE_HEIGHT)
-    y_dim = pixelize(move.y, SQUARE_WIDTH)
-    pixel_array[x_dim][y_dim] = move.symbol
+    x = pixelize(move.x, SQUARE_HEIGHT)
+    y = pixelize(move.y, SQUARE_WIDTH)
+    pixel_array[x][y] = move.symbol
   end
 
   def board_length(square_length)
