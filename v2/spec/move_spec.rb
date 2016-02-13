@@ -1,4 +1,4 @@
-require_relative '../models/move'
+require 'spec_helper'
 
 describe Move do
   describe 'thing_to_be_described' do

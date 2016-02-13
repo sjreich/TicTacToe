@@ -1,5 +1,3 @@
-require_relative '../controllers/menu_controller'
-require_relative '../models/move'
 require 'spec_helper'
 
 describe Game do

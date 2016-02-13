@@ -1,6 +1,7 @@
 require 'rspec/its'
 require 'pry'
 require_relative 'helpers'
+require_relative '../controllers/menu_controller'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

@@ -1,5 +1,4 @@
-require_relative '../controllers/menu_controller'
-require 'pry'
+require 'spec_helper'
 
 describe MenuController do
 

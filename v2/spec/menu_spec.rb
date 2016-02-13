@@ -1,4 +1,4 @@
-require_relative '../models/menu'
+require 'spec_helper'
 
 describe Menu do
   subject { Menu }

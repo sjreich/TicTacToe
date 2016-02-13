@@ -1,5 +1,4 @@
-require_relative '../controllers/move_controller'
-require_relative '../models/game'
+require 'spec_helper'
 
 describe MoveController do
   subject { MoveController.new(game) }
