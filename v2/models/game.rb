@@ -77,11 +77,3 @@ class Game
     @move_list.count >= 9
   end
 end
-
-class OldGameStorage
-  attr_accessor :games
-  
-  def initialize
-    @games = []
-  end
-end

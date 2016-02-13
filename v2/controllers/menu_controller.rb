@@ -35,15 +35,15 @@ class MenuController
   end
 
   def display_move_list
-    unless old_games.empty?
-      old_games.last.display_move_list
+    if old_game
+      old_game.display_move_list
     else
       puts "No last game to review."
     end
   end
 
-  def old_games
-    @game_controller.old_game_storage.games
+  def old_game
+    game_controller.game
   end
 
   def run_game

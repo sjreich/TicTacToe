@@ -2,12 +2,7 @@ require_relative 'move_controller'
 require_relative '../models/game'
 
 class GameController
-  attr_accessor :old_game_storage
   attr_reader :game, :move_controller
-
-  def initialize
-    @old_game_storage = OldGameStorage.new
-  end
 
   def run!
     start_up!
@@ -37,7 +32,6 @@ class GameController
     else
       puts "It's a tie."
     end
-    @old_game_storage.games << @game
   end
 
   def winner
