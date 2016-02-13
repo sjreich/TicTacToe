@@ -24,16 +24,17 @@ class Board
   def initial_pixel_array
     pixel_array = []
     for row in 1..board_length(SQUARE_HEIGHT)
-      row_output = []
+      row_output = ''
       for col in 1..board_length(SQUARE_WIDTH)
-        if intersection_here?(row, col)
-          row_output << "+"
-        elsif horizontal_here?(row)
-          row_output << "-"
-        elsif vertical_here?(col)
-          row_output << "|"
+        case
+        when intersection_here?(row, col)
+          row_output += '+'
+        when horizontal_here?(row)
+          row_output += '-'
+        when vertical_here?(col)
+          row_output += '|'
         else
-          row_output << " "
+          row_output += ' '
         end
       end
       pixel_array << row_output
@@ -43,13 +44,13 @@ class Board
 
   private
   def pixel_string
-    final_pixel_array.map(&:join).join("\n")
+    final_pixel_array.join("\n")
   end
 
   def add_to_pixel_array(move)
     x = pixelize(move.x, SQUARE_HEIGHT)
     y = pixelize(move.y, SQUARE_WIDTH)
-    pixel_array[x][y] = move.symbol
+    pixel_array[x][y] = move.symbol.to_s
   end
 
   def board_length(square_length)

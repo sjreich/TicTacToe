@@ -29,7 +29,7 @@ describe Board do
   describe '#initial_pixel_array' do
     subject { super().initial_pixel_array }
     it 'should eq standard output' do
-      expect(subject.map(&:join)).to eq blank_board
+      expect(subject).to eq blank_board
     end
   end
 end
