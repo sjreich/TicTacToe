@@ -14,12 +14,13 @@ class GameController
     puts "Let's play Tic Tac Toe!"
     @game = Game.new
     @move_controller = MoveController.new(game)
+    game.display!
   end
 
   def perform_main_cycle!
     loop do
-      game.display!
       move_controller.execute!
+      game.display!
       break if winner
     end
   end

@@ -30,7 +30,12 @@ class Game
     update_grid!
     x = move.x
     y = move.y
-    @grid[x][y].nil?
+    if @grid[x][y].nil?
+      true
+    else
+      puts 'That position is already taken.'
+      false
+    end
   end
 
   def register_move(move)

@@ -90,6 +90,10 @@ describe Game do
     context 'when the position is already taken' do
       let(:move_list) { [Move.new(2, 2, :O)] }
       it { should eq false }
+      it 'prints an error message' do
+        subject
+        expect(game).to have_received(:puts)
+      end
     end
   end
 end
