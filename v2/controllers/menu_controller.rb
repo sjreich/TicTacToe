@@ -55,7 +55,4 @@ class MenuController
   end
 end
 
-if __FILE__ == 'controllers/menu_controller.rb'
-  MenuController.new.execute
-end
-
+MenuController.new.execute if $0 ==  __FILE__
