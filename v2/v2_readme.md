@@ -27,6 +27,7 @@ Beyond that, it would be great if move-controller didn't have the strong depende
 no tests around the menu controller, really
 and no game_controller_spec at all
 
+Really, there are more dependencies than stated above.  Board needs to know that move_list is an array of Moves, and it needs to know a lot about moves.
 
 
 #################
