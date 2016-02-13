@@ -33,14 +33,6 @@ class Move
     end
   end
 
-  def disp_x
-    @x
-  end
-
-  def disp_y
-    @y
-  end
-
   def x
     @x - 1
   end
