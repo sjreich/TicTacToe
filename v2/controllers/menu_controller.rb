@@ -5,7 +5,11 @@ require_relative '../models/menu'
 require_relative '../views/board'
 
 class MenuController
-  attr_accessor :game
+  attr_accessor :game_controller
+
+  def initialize
+    @game_controller = GameController.new
+  end
 
   def execute
     loop do
@@ -47,8 +51,7 @@ class MenuController
   end
 
   def run_game
-    @game_controller = GameController.new
-    @game_controller.run!
+    game_controller.run!
   end
 end
 
