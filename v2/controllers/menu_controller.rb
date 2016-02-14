@@ -34,7 +34,7 @@ class MenuController
   def quit
     puts "Quitting..."
     print "\n"
-    sleep 2
+    sleep 1
     exit
   end
 

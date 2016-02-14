@@ -1,6 +1,11 @@
 class GameController
   attr_reader :game, :move_controller
 
+  def initialize
+    @game = Game.new
+    @move_controller = MoveController.new(game)
+  end
+
   def run!
     start_up!
     perform_main_cycle!
@@ -9,8 +14,6 @@ class GameController
 
   def start_up!
     puts "Let's play Tic Tac Toe!"
-    @game = Game.new
-    @move_controller = MoveController.new(game)
     game.display!
   end
 
