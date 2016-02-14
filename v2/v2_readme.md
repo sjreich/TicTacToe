@@ -33,3 +33,8 @@ Really, there are more dependencies than stated above.  Board needs to know that
 #################
 
 Final thoughts:
+
+Once everything else is in place, it's not very hard at all to do the dependency-injection stuff, and minimize dependencies among classes.
+I also cleaned up a bunch of other stuff.
+
+The big to do remaining to is add more tests.
