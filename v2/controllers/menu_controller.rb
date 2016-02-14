@@ -3,19 +3,23 @@ require_relative '../autoloader'
 class MenuController
   attr_accessor :game_controller
 
+  ACCEPTABLE_CHOICES = [:s, :r, :q].freeze
+
   def initialize
     @game_controller = GameController.new
   end
 
   def execute
     loop do
-      Menu.display
-      act_on_menu_choice(Menu.get_selection)
+      print menu_content
+      act_on(menu_selection)
       sleep 1
     end
   end
 
-  def act_on_menu_choice(choice)
+  # private
+
+  def act_on(choice)
     sleep 1
     case choice
     when :s
@@ -48,6 +52,25 @@ class MenuController
 
   def run_game
     game_controller.run!
+  end
+
+  def menu_selection
+    loop do
+      selection = gets.chomp.downcase.to_sym
+      print "\n"
+      return selection if ACCEPTABLE_CHOICES.include? selection
+      puts "That wasn't one of the options."
+      print menu_content
+    end 
+  end
+
+  def menu_content
+"
+(S)tart game
+(R)eview last game
+(Q)uit
+
+Your choice: "
   end
 end
 
