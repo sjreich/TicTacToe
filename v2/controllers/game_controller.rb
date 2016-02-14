@@ -1,6 +1,3 @@
-require_relative 'move_controller'
-require_relative '../models/game'
-
 class GameController
   attr_reader :game, :move_controller
 

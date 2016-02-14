@@ -1,6 +1,3 @@
-require_relative '../models/move'
-require_relative '../models/game'
-
 class MoveController
   attr_reader :game
   attr_accessor :whose_turn

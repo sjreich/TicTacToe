@@ -1,8 +1,4 @@
-require_relative 'game_controller'
-require_relative '../models/game'
-require_relative '../models/move'
-require_relative '../models/menu'
-require_relative '../views/board'
+require_relative '../autoloader'
 
 class MenuController
   attr_accessor :game_controller
