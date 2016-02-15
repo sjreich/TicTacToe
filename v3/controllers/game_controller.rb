@@ -7,35 +7,35 @@ class GameController
   end
 
   def run!
-    start_up!
-    perform_main_cycle!
-    wrap_up!
+    _start_up!
+    _perform_main_cycle!
+    _wrap_up!
   end
 
-  def start_up!
+  def _start_up!
     puts "Let's play Tic Tac Toe!"
     game.display!
   end
 
-  def perform_main_cycle!
+  def _perform_main_cycle!
     loop do
       move_controller.execute!
       game.display!
-      break if winner
+      break if _winner
     end
   end
 
-  def wrap_up!
+  def _wrap_up!
     sleep 0.5
     print "It's over. "
-    if winner == :X || winner == :O
-      puts "#{winner}'s win."
+    if _winner == :X || _winner == :O
+      puts "#{_winner}'s win."
     else
       puts "It's a tie."
     end
   end
 
-  def winner
+  def _winner
     game.winner?
   end
 end
