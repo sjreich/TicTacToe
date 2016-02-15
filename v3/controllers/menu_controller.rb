@@ -9,62 +9,59 @@ class MenuController
     @game_controller = GameController.new
   end
 
-  def execute
+  def execute!
     loop do
-      print menu_content
-      act_on(menu_selection)
+      _act_on(_menu_selection)
       sleep 1
     end
   end
 
-  # private
-
-  def act_on(choice)
+  def _act_on(choice)
     sleep 1
     case choice
     when :s
-      run_game
+      _run_game!
     when :r
-      display_move_list
+      _display_move_list!
     when :q
-      quit
+      _quit!
     end
   end
 
-  def quit
+  def _quit!
     puts "Quitting..."
     print "\n"
     sleep 1
     exit
   end
 
-  def display_move_list
-    if old_game
-      old_game.display_move_list
+  def _display_move_list!
+    if _old_game
+      _old_game.display_move_list
     else
       puts "No last game to review."
     end
   end
 
-  def old_game
+  def _old_game
     game_controller.game
   end
 
-  def run_game
+  def _run_game!
     game_controller.run!
   end
 
-  def menu_selection
+  def _menu_selection
     loop do
+      print _menu_content
       selection = gets.chomp.downcase.to_sym
       print "\n"
       return selection if ACCEPTABLE_CHOICES.include? selection
       puts "That wasn't one of the options."
-      print menu_content
     end 
   end
 
-  def menu_content
+  def _menu_content
 "
 (S)tart game
 (R)eview last game
@@ -74,4 +71,4 @@ Your choice: "
   end
 end
 
-MenuController.new.execute if $0 ==  __FILE__
+MenuController.new.execute! if $0 ==  __FILE__
