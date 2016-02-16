@@ -2,7 +2,7 @@ class MoveController
   attr_reader :game
   attr_accessor :whose_turn
 
-  ACCEPTABLE_INPUT = ['1', '2', '3']
+  ACCEPTABLE_INPUT = [1,2,3]
 
   def initialize(game)
     @game = game
@@ -10,7 +10,7 @@ class MoveController
   end
 
   def execute!
-    game.register_move(_new_move)
+    game.register_move!(_new_move)
     _alternate_turn!
   end
 
@@ -44,8 +44,8 @@ class MoveController
 
   def _raw_input
     loop do
-      input = gets
-      return input.chomp.to_i if ACCEPTABLE_INPUT.include? input
+      input = gets.chomp.to_i
+      return input if ACCEPTABLE_INPUT.include? input
     end
   end
 end

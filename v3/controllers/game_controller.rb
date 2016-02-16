@@ -36,6 +36,6 @@ class GameController
   end
 
   def _winner
-    game.winner?
+    game.winner
   end
 end

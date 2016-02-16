@@ -36,10 +36,10 @@ class MenuController
   end
 
   def _display_move_list!
-    if _old_game
-      _old_game.display_move_list
+    if _old_game.move_list.empty?
+      puts 'No last game to review.'
     else
-      puts "No last game to review."
+      _old_game.display_move_list!
     end
   end
 

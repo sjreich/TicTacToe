@@ -11,14 +11,14 @@ describe MoveController do
   before(:each) do
     allow(move_controller).to receive(:puts)
     allow(move_controller).to receive(:gets) { input.shift }
-    allow(game).to receive(:register_move)
+    allow(game).to receive(:register_move!)
   end
 
   describe '#execute!' do
     specify { expect{ subject.execute! }.to change{ subject.whose_turn } }
     it 'should register a move' do
       subject.execute!
-      expect(game).to have_received(:register_move)
+      expect(game).to have_received(:register_move!)
     end
   end
 

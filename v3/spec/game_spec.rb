@@ -14,7 +14,7 @@ describe Game do
   end
 
   describe '#register_move' do
-    subject { super().register_move(move) }
+    subject { super().register_move!(move) }
 
     it 'should increment number of moves in the game model' do
       expect{ subject }.to change{ game.move_list.count }.by(1)
@@ -25,17 +25,15 @@ describe Game do
     end
   end
 
-  describe '#winner?' do
-    subject { super().winner? }
+  describe '#winner' do
+    subject { super().winner }
 
     shared_examples 'with :X and :O' do
-      context 'X' do
-        let(:symbol) { 'X' }
-        it { should eq symbol }
-      end
-      context 'O' do
-        let(:symbol) { 'O' }
-        it { should eq symbol }
+      ['X', 'O'].each do |symbol|
+        context do
+          let(:symbol) { symbol }
+          it { should eq symbol }
+        end
       end
     end
 
