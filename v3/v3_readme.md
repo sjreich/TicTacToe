@@ -23,6 +23,13 @@ Another thing I can do is to investigate when I have things that are working in 
 
 ###### While working
 
+I did discover one place where I can clean up the interfaces - really just another way of thinking about the same things: having your classes as loosely coupled as possible: putting all of the validation for new moves into the game, where it can check that they are in bounds, and whether the position is taken.  This is a real restriction on the interactions among classes.
+
+Also added a good deal of tests.
+
 #################
 
 Final thoughts:
+
+What I really need at this point is some serious cucumber-style end-to-end automatic tests.
+

@@ -45,7 +45,6 @@ class MoveController
   def _raw_input
     loop do
       input = gets.strip
-      puts input
       return input.to_i if /\A\d+\z/ === input
       print "That wasn't a number.  Try again: "
     end

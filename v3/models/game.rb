@@ -38,9 +38,12 @@ class Game
   end
 
   def _in_bounds?(move)
-    in_bounds = (0...NUM_OF_ROWS).include?(move.x) && (0...NUM_OF_COLS).include?(move.y)
-    puts 'That move is out of bounds.' unless in_bounds
-    in_bounds
+    if (0...NUM_OF_ROWS).include?(move.x) && (0...NUM_OF_COLS).include?(move.y)
+      true
+    else
+      puts 'That move is out of bounds.'
+      false
+    end
   end
 
   def _position_free?(move)
