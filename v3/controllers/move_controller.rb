@@ -2,8 +2,6 @@ class MoveController
   attr_reader :game
   attr_accessor :whose_turn
 
-  ACCEPTABLE_INPUT = [1,2,3]
-
   def initialize(game)
     @game = game
     @whose_turn = :X
@@ -44,8 +42,9 @@ class MoveController
 
   def _raw_input
     loop do
-      input = gets.chomp.to_i
-      return input if ACCEPTABLE_INPUT.include? input
+      input = gets.strip
+      return input.to_i if /\A\d+\z/ === input
+      print "That wasn't a number.  Try again: "
     end
   end
 end
