@@ -42,19 +42,28 @@ class Game
   end
 
   def _move_list_content
-    content = ["\tX\t|\tO\t", "----------------+-----------------"]
+    content = _move_list_header
     move_list.each_slice(2) do |pair|
-      x1 = pair[0].x + 1
-      y1 = pair[0].y + 1
-      row = "\t#{x1}, #{y1}\t|" 
-      if pair[1]
-        x2 = pair[1].x + 1
-        y2 = pair[1].y + 1
-        row += "\t#{x2}, #{y2}"
-      end
-      content << row
+      content << _move_list_row
     end
     content.join("\n")
+  end
+
+  def _move_list_header
+    [ "\tX\t|\tO\t", "----------------+-----------------" ]
+  end
+
+  def _move_list_row(pair_)
+    x1 = pair[0].x + 1
+    y1 = pair[0].y + 1
+    row = "\t#{x1}, #{y1}\t|"
+
+    return row unless pair[1]
+
+    x2 = pair[1].x + 1
+    y2 = pair[1].y + 1
+    row += "\t#{x2}, #{y2}"
+    row
   end
 
   def _update_grid!
