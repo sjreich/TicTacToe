@@ -25,6 +25,6 @@ describe MoveController do
   end
 
   describe '#_add_new_move!' do
-    specify { expect{subject._add_new_move! }.to change{ game.move_list } }
+    specify { expect{subject._add_new_move! }.to change{ game.move_list.count }.by(1) }
   end
 end

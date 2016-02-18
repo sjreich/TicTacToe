@@ -41,8 +41,16 @@ describe Game do
       end
 
       context 'out of bounds' do
-        let(:move) { Move.new(0, 4, :X) }
-        include_examples 'notices invalid move'
+        [ [0, 2],
+          [2, 0],
+          [2, 4],
+          [4, 2]
+        ].each do |moves|
+          context "#{moves}" do
+            let(:move) { Move.new(moves[0], moves[1], :X) }
+            include_examples 'notices invalid move'
+          end
+        end
       end
     end
   end

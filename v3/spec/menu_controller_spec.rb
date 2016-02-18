@@ -19,7 +19,7 @@ describe MenuController do
     it { should have_received(:loop) }
   end
 
-  describe '#menu_content' do
+  describe '#_menu_content' do
     subject { super().send(:_menu_content) }
     it do should eq "
 (S)tart game
