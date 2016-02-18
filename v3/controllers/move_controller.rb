@@ -8,15 +8,17 @@ class MoveController
   end
 
   def execute!
-    game.register_move!(_new_move)
+    _add_new_move!
     _alternate_turn!
   end
 
-  def _new_move
+  def _add_new_move!
     loop do
       x, y = *_input
-      move = Move.try_to_create(x, y, whose_turn)
-      return move if _valid?(move)
+      move = Move.new(x, y, whose_turn)
+      if game.register(move)
+        break
+      end
     end
   end
 
@@ -43,6 +45,7 @@ class MoveController
   def _raw_input
     loop do
       input = gets.strip
+      puts input
       return input.to_i if /\A\d+\z/ === input
       print "That wasn't a number.  Try again: "
     end

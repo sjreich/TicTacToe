@@ -1,5 +1,8 @@
 class Game
   attr_accessor :move_list, :grid
+
+  NUM_OF_ROWS = 3.freeze
+  NUM_OF_COLS = 3.freeze
   
   def initialize
     @move_list = []
@@ -14,19 +17,8 @@ class Game
     Board.new(move_list).draw
   end
 
-  def valid_move?(move)
-    _update_grid!
-    x = move.x
-    y = move.y
-    if @grid[x][y].nil?
-      true
-    else
-      puts 'That position is already taken.'
-      false
-    end
-  end
-
-  def register_move!(move)
+  def register(move)
+    return false unless _valid?(move)
     @move_list << move
   end
 
@@ -41,10 +33,32 @@ class Game
     result ||= _tie?
   end
 
+  def _valid?(move)
+    _in_bounds?(move) && _position_free?(move)
+  end
+
+  def _in_bounds?(move)
+    in_bounds = (0...NUM_OF_ROWS).include?(move.x) && (0...NUM_OF_COLS).include?(move.y)
+    puts 'That move is out of bounds.' unless in_bounds
+    in_bounds
+  end
+
+  def _position_free?(move)
+    _update_grid!
+    x = move.x
+    y = move.y
+    if @grid[x][y].nil?
+      true
+    else
+      puts 'That position is already taken.'
+      false
+    end
+  end
+
   def _move_list_content
     content = _move_list_header
     move_list.each_slice(2) do |pair|
-      content << _move_list_row
+      content << _move_list_row(pair)
     end
     content.join("\n")
   end
@@ -53,7 +67,7 @@ class Game
     [ "\tX\t|\tO\t", "----------------+-----------------" ]
   end
 
-  def _move_list_row(pair_)
+  def _move_list_row(pair)
     x1 = pair[0].x + 1
     y1 = pair[0].y + 1
     row = "\t#{x1}, #{y1}\t|"

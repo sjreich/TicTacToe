@@ -10,22 +10,21 @@ describe MoveController do
 
   before(:each) do
     allow(move_controller).to receive(:puts)
+    allow(move_controller).to receive(:print)
     allow(move_controller).to receive(:gets) { input.shift }
-    allow(game).to receive(:register_move!)
   end
 
   describe '#execute!' do
+    before{ allow(game).to receive(:register)  { true } }
+
     specify { expect{ subject.execute! }.to change{ subject.whose_turn } }
     it 'should register a move' do
       subject.execute!
-      expect(game).to have_received(:register_move!)
+      expect(game).to have_received(:register)
     end
   end
 
-  describe '#_new_move' do
-    subject { super()._new_move }
-    it { should be_a Move }
-    its(:x) { should eq first_real_input.to_i - 1 }
-    its(:y) { should eq second_real_input.to_i - 1 }
+  describe '#_add_new_move!' do
+    specify { expect{subject._add_new_move! }.to change{ game.move_list } }
   end
 end

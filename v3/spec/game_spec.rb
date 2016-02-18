@@ -13,15 +13,37 @@ describe Game do
     allow(game).to receive(:puts)
   end
 
-  describe '#register_move' do
-    subject { super().register_move!(move) }
+  describe '#register' do
+    subject { super().register(move) }
 
-    it 'should increment number of moves in the game model' do
-      expect{ subject }.to change{ game.move_list.count }.by(1)
+    context 'valid move' do
+      it 'should increment number of moves in the game model' do
+        expect{ subject }.to change{ game.move_list.count }.by(1)
+      end
+
+      it 'should increment the number of moves in the view' do
+        expect{ subject }.to change{ board_move_count }.by(1)
+      end
     end
 
-    it 'should increment the number of moves in the view' do
-      expect{ subject }.to change{ board_move_count }.by(1)
+    context 'invalid move' do
+      shared_examples 'notices invalid move' do
+        it { should eq false }
+        it 'prints an error message' do
+          subject
+          expect(game).to have_received(:puts)
+        end
+      end
+
+      context 'position already taken' do
+        let(:move_list) { [Move.new(2, 2, :O)] }
+        include_examples 'notices invalid move'
+      end
+
+      context 'out of bounds' do
+        let(:move) { Move.new(0, 4, :X) }
+        include_examples 'notices invalid move'
+      end
     end
   end
 
@@ -75,23 +97,6 @@ describe Game do
                           Move.new(2, 2, symbol), 
                           Move.new(1, 3, symbol) ] }
       include_examples 'with :X and :O'
-    end
-  end
-
-  describe '#valid_move?' do
-    subject { super().valid_move?(move) }
-
-    context 'move is not taken' do
-      it { should eq true }
-    end
-
-    context 'when the position is already taken' do
-      let(:move_list) { [Move.new(2, 2, :O)] }
-      it { should eq false }
-      it 'prints an error message' do
-        subject
-        expect(game).to have_received(:puts)
-      end
     end
   end
 end
