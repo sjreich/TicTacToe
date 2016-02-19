@@ -30,10 +30,6 @@ class MoveController
     end
   end
 
-  def _valid?(move)
-    move && game.valid_move?(move)
-  end
-
   def _input
     print "row (1-3): "
     x = _raw_input

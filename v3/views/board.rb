@@ -9,7 +9,7 @@ class Board
     @pixel_array = initial_pixel_array
   end
 
-  def draw
+  def draw!
     puts pixel_string
   end
 
